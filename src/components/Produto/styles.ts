@@ -49,7 +49,7 @@ export const Botao = styled.button<Omit<Props, 'produtos'>>`
 export const Infos = styled.div`
   position: absolute;
   top: 16px;
-  right: 16px;
+  right: 4px;
 `
 export const TagContainer = styled.div`
   background-color: ${cores.vermelho};

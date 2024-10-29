@@ -24,18 +24,20 @@ const Produto = ({ titulo, descricao, imagem, receita, infos }: Props) => {
   return (
     <ProdutoContainer receita={receita}>
       <Imagem src={imagem} />
-      <Infos>
-        {infos.map((info) => (
-          <TagContainer key={info}>{info}</TagContainer>
-        ))}
-      </Infos>
       <NotaContainer>
         <Titulo receita={receita}>{titulo}</Titulo>
         {receita === 'frutosMar' && (
-          <Nota>
-            4.9
-            <img src={estrela} />
-          </Nota>
+          <>
+            <Infos>
+              {infos.map((info) => (
+                <TagContainer key={info}>{info}</TagContainer>
+              ))}
+            </Infos>
+            <Nota>
+              4.9
+              <img src={estrela} />
+            </Nota>
+          </>
         )}
       </NotaContainer>
       <Descricao receita={receita}>{descricao}</Descricao>
