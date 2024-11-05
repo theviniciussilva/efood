@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import EstiloGlobal from './styles'
 import Home from './pages/Home'
-import Restaurantes from './pages/Restaurantes'
+import Perfil from './pages/Perfil'
 
 const rotas = createBrowserRouter([
   {
@@ -9,8 +9,8 @@ const rotas = createBrowserRouter([
     element: <Home />
   },
   {
-    path: '/restaurantes',
-    element: <Restaurantes />
+    path: '/perfil',
+    element: <Perfil />
   }
 ])
 

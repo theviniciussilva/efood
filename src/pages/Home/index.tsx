@@ -1,13 +1,11 @@
-import Cardapio, { pizzaMarguerita } from '../../components/Cardapio'
+import Cardapio, { frutosDoMar } from '../../components/Cardapio'
 import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import Hero from '../../components/Hero'
+import HeaderRestaurante from '../../components/HeaderRestaurante'
 
 const Home = () => (
   <>
-    <Header />
-    <Hero />
-    <Cardapio receita="pizza" produtos={pizzaMarguerita} />
+    <HeaderRestaurante />
+    <Cardapio receita="frutosMar" produtos={frutosDoMar} />
     <Footer />
   </>
 )
