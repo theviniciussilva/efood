@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
 import { Props } from '../Cardapio'
+import { Link } from 'react-router-dom'
 
 export const ProdutoContainer = styled.div<Omit<Props, 'produtos'>>`
   background-color: ${(props) =>
@@ -30,20 +31,28 @@ export const Imagem = styled.img`
   width: 100%;
 `
 
-export const Botao = styled.button<Omit<Props, 'produtos'>>`
-  color: ${(props) =>
-    props.receita === 'pizza' ? cores.vermelho : cores.branco};
+export const Botao = styled(Link)`
+  color: ${cores.branco};
+  padding: 4px 6px;
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
-  background-color: ${(props) =>
-    props.receita === 'pizza' ? cores.begeEscuro : cores.vermelho};
+  background-color: ${cores.vermelho};
   border: none;
-  width: ${(props) => (props.receita === 'pizza' ? '304px  ' : '82px')};
-  height: 24px;
   display: inline-block;
-  margin: ${(props) =>
-    props.receita === 'frutosMar' ? '16px 0px 8px 8px' : '0px'};
+  margin: 16px 0px 8px 8px;
+  tex-decoration: none;
+`
+
+export const BotaoCarrinho = styled(Botao)`
+  color: ${cores.vermelho};
+  background-color: ${cores.begeEscuro};
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  margin-top: 8px;
 `
 
 export const Infos = styled.div`

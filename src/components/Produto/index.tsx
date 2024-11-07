@@ -7,7 +7,8 @@ import {
   TagContainer,
   Imagem,
   Nota,
-  NotaContainer
+  NotaContainer,
+  BotaoCarrinho
 } from './styles'
 
 import estrela from '../../assets/images/estrela.svg'
@@ -42,9 +43,9 @@ const Produto = ({ titulo, descricao, imagem, receita, infos }: Props) => {
       </NotaContainer>
       <Descricao receita={receita}>{descricao}</Descricao>
       {receita === 'frutosMar' ? (
-        <Botao receita={receita}>Saiba Mais</Botao>
+        <Botao to="/perfil">Saiba Mais</Botao>
       ) : (
-        <Botao receita={receita}>Adicionar ao carrinho</Botao>
+        <BotaoCarrinho to="#">Adicionar ao carrinho</BotaoCarrinho>
       )}
     </ProdutoContainer>
   )
