@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 import { Props } from '.'
 
-export const CardapioGrid = styled.div<Omit<Props, 'produtos'>>`
+export const CardapioGrid = styled.div<Omit<Props, 'restaurantes'>>`
   display: grid;
   grid-template-columns: ${(props) =>
-    props.receita === 'pizza' ? '1fr 1fr 1fr' : '1fr 1fr'};
-  gap: ${(props) => (props.receita === 'pizza' ? '32px' : '80px')};
+    props.layout === 'secondary' ? '1fr 1fr 1fr' : '1fr 1fr'};
+  gap: ${(props) => (props.layout === 'secondary' ? '32px' : '80px')};
 `
 
 export const CardapioContainer = styled.section`

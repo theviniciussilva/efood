@@ -7,7 +7,7 @@ const Header = () => (
     <HeaderContainer>
       <NavBar className="container">
         <li>
-          <LinkItem to="/restaurantes">Restaurantes</LinkItem>
+          <LinkItem to="/">Restaurantes</LinkItem>
         </li>
         <li>
           <LinkItem to="/">
