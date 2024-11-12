@@ -10,4 +10,5 @@ export const HeaderText = styled.h2`
   font-size: 36px;
   line-height: 42px;
   color: ${cores.vermelho};
+  margin-botttom: 40px;
 `
