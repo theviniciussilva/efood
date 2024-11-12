@@ -26,6 +26,9 @@ const EstiloGlobal = createGlobalStyle`
 `
 export const HeaderContainer = styled.header`
   background-image: url(${fundo});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `
 export const Imagem = styled.img`
   padding: 64px 0;
