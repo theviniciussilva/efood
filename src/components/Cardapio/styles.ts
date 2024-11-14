@@ -6,7 +6,7 @@ export const CardapioGrid = styled.div<Omit<Props, 'restaurantes'>>`
   display: grid;
   grid-template-columns: ${(props) =>
     props.layout === 'secondary' ? '1fr 1fr 1fr' : '1fr 1fr'};
-  gap: ${(props) => (props.layout === 'secondary' ? '32px' : '80px')};
+  column-gap: ${(props) => (props.layout === 'secondary' ? '32px' : '80px')};
 `
 
 export const CardapioContainer = styled.section`

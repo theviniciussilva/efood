@@ -5,7 +5,7 @@ import Header from '../../components/Header'
 import Hero from '../../components/Hero'
 import { Produtos } from '../Home'
 
-const Restaurantes = () => {
+const Perfil = () => {
   const [produtos, setProdutos] = useState<Produtos[]>([])
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const Restaurantes = () => {
   )
 }
 
-export default Restaurantes
+export default Perfil

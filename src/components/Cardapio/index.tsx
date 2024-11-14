@@ -8,12 +8,12 @@ export type Props = {
 }
 
 const Cardapio = ({ restaurantes, layout }: Props) => {
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
+  // const formataPreco = (preco: number) => {
+  //   return new Intl.NumberFormat('pt-BR', {
+  //     style: 'currency',
+  //     currency: 'BRL'
+  //   }).format(preco)
+  // }
 
   const getProdutosTags = (restaurante: Produtos) => {
     const tags = []
@@ -33,7 +33,6 @@ const Cardapio = ({ restaurantes, layout }: Props) => {
         <CardapioGrid layout={layout} className="container">
           {restaurantes.map((restaurante) => (
             <div key={restaurante.id}>
-              {/* Se layout for 'primary', exibe os detalhes do restaurante */}
               {layout === 'primary' && (
                 <Produto
                   nota={restaurante.avaliacao}
@@ -45,19 +44,19 @@ const Cardapio = ({ restaurantes, layout }: Props) => {
                   id={restaurante.id}
                 />
               )}
-              {/* Exibe todos os itens do cardápio do restaurante */}
               {layout === 'secondary' &&
                 restaurante.cardapio.map((comida) => (
-                  <Produto
-                    key={comida.id}
-                    infos={['']}
-                    layout={layout}
-                    descricao={comida.descricao}
-                    foto={comida.foto}
-                    nome={comida.nome}
-                    id={comida.id}
-                    preco={comida.preco}
-                  />
+                  <div key={comida.id}>
+                    <Produto
+                      infos={['']}
+                      layout={layout}
+                      descricao={comida.descricao}
+                      foto={comida.foto}
+                      nome={comida.nome}
+                      id={comida.id}
+                      preco={comida.preco}
+                    />
+                  </div>
                 ))}
             </div>
           ))}

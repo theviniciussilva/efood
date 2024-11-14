@@ -8,16 +8,13 @@ import {
   Imagem,
   Nota,
   NotaContainer,
-  BotaoCarrinho,
-  ModalContent,
-  Modal,
-  ImageContainer
+  BotaoCarrinho
 } from './styles'
-import fechar from '../../assets/images/fechar.png'
 
 import estrela from '../../assets/images/estrela.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Produtos } from '../../pages/Home'
+import Modal from '../Modal'
 
 export interface ProdutosItem {
   foto: string
@@ -32,10 +29,15 @@ export interface ProdutosItem {
   produtos?: Produtos
 }
 
+const mock = {
+  titulo: 'Pizza Marguerita',
+  descricao:
+    'A pizza Margherita é uma pizza clássica da culinária italiana, reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma base de massa fina e crocante, coberta com molho de tomate fresco, queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem. A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido, o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de sabor herbáceo. É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é uma ótima opção para qualquer ocasião.',
+  porcao: 'Serve: de 2 a 3 pessoas',
+  preco: 60
+}
+
 const Produto = ({
-  produtos,
-  preco,
-  porcao,
   nome,
   descricao,
   foto,
@@ -43,14 +45,21 @@ const Produto = ({
   infos,
   nota
 }: ProdutosItem) => {
+  const [restaurante, setRestaurante] = useState<Produtos>()
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => setRestaurante(res))
+  }, [])
+  const [modalEstaAberto, setModalEstaAberto] = useState(false)
+
   const getDescricao = (descricao: string) => {
     if (descricao.length > 200) {
       return descricao.slice(0, 250) + '...'
     }
     return descricao
   }
-  const [modalEstaAberto, setModalEstaAberto] = useState(false)
-  const [modalUrl, setModalUrl] = useState('')
 
   return (
     <>
@@ -74,49 +83,22 @@ const Produto = ({
         </NotaContainer>
         <Descricao layout={layout}>{getDescricao(descricao)}</Descricao>
         {layout === 'primary' ? (
-          <Botao to="/perfil/">Saiba Mais</Botao>
+          <Botao to={`/perfil/${restaurante?.id}`}>Saiba Mais</Botao>
         ) : (
           <BotaoCarrinho onClick={() => setModalEstaAberto(true)} to="#">
             Adicionar ao carrinho
           </BotaoCarrinho>
         )}
       </ProdutoContainer>
-      <Modal className={modalEstaAberto ? 'visible' : ''}>
-        <ModalContent className="container">
-          <img onClick={() => setModalEstaAberto(false)} src={fechar} />
-          <main>
-            <ImageContainer>
-              <img src={modalUrl} />
-            </ImageContainer>
-            <div>
-              <h4>Pizza Marguerita</h4>
-              <p>
-                A pizza Margherita é uma pizza clássica da culinária italiana,
-                reconhecida por sua simplicidade e sabor inigualável. Ela é
-                feita com uma base de massa fina e crocante, coberta com molho
-                de tomate fresco, queijo mussarela de alta qualidade, manjericão
-                fresco e azeite de oliva extra-virgem. A combinação de sabores é
-                perfeita, com o molho de tomate suculento e ligeiramente ácido,
-                o queijo derretido e cremoso e as folhas de manjericão frescas,
-                que adicionam um toque de sabor herbáceo. É uma pizza simples,
-                mas deliciosa, que agrada a todos os paladares e é uma ótima
-                opção para qualquer ocasião.
-              </p>
-              <br />
-              <p>{porcao}</p>
-              <BotaoCarrinho to="#">
-                Adicionar ao carrinho - R$ {preco}
-              </BotaoCarrinho>
-            </div>
-          </main>
-        </ModalContent>
-        <div
-          onClick={() => setModalEstaAberto(false)}
-          className="overlay"
-        ></div>
-      </Modal>
+      <Modal
+        descricao={mock.descricao}
+        porcao={mock.porcao}
+        preco={mock.preco}
+        titulo={mock.titulo}
+        visible={modalEstaAberto}
+        onClose={() => setModalEstaAberto(false)}
+      />
     </>
   )
 }
-
 export default Produto
