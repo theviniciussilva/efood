@@ -12,11 +12,10 @@ import {
 } from './styles'
 
 import estrela from '../../assets/images/estrela.svg'
-import { useEffect, useState } from 'react'
-import { Produtos } from '../../pages/Home'
+import { useState } from 'react'
 import Modal from '../Modal'
 
-export interface ProdutosItem {
+type ProdutosItem = {
   foto: string
   preco?: number
   id: number
@@ -26,32 +25,19 @@ export interface ProdutosItem {
   layout: 'primary' | 'secondary'
   infos: string[]
   nota?: number
-  produtos?: Produtos
-}
-
-const mock = {
-  titulo: 'Pizza Marguerita',
-  descricao:
-    'A pizza Margherita é uma pizza clássica da culinária italiana, reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma base de massa fina e crocante, coberta com molho de tomate fresco, queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem. A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido, o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de sabor herbáceo. É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é uma ótima opção para qualquer ocasião.',
-  porcao: 'Serve: de 2 a 3 pessoas',
-  preco: 60
 }
 
 const Produto = ({
+  preco,
   nome,
   descricao,
   foto,
   layout,
   infos,
-  nota
+  nota,
+  id,
+  porcao
 }: ProdutosItem) => {
-  const [restaurante, setRestaurante] = useState<Produtos>()
-
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurante(res))
-  }, [])
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
   const getDescricao = (descricao: string) => {
@@ -83,18 +69,24 @@ const Produto = ({
         </NotaContainer>
         <Descricao layout={layout}>{getDescricao(descricao)}</Descricao>
         {layout === 'primary' ? (
-          <Botao to={`/perfil/${restaurante?.id}`}>Saiba Mais</Botao>
+          <Botao to={`/perfil/${id}`}>Saiba Mais</Botao>
         ) : (
-          <BotaoCarrinho onClick={() => setModalEstaAberto(true)} to="#">
+          <BotaoCarrinho
+            onClick={() => {
+              setModalEstaAberto(true)
+            }}
+            to="#"
+          >
             Adicionar ao carrinho
           </BotaoCarrinho>
         )}
       </ProdutoContainer>
       <Modal
-        descricao={mock.descricao}
-        porcao={mock.porcao}
-        preco={mock.preco}
-        titulo={mock.titulo}
+        preco={preco}
+        descricao={descricao}
+        foto={foto}
+        nome={nome}
+        porcao={porcao}
         visible={modalEstaAberto}
         onClose={() => setModalEstaAberto(false)}
       />

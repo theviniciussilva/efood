@@ -3,7 +3,7 @@ import Cardapio from '../../components/Cardapio'
 import Footer from '../../components/Footer'
 import HeaderRestaurante from '../../components/HeaderRestaurante'
 
-export type Produtos = {
+export interface Restaurantes {
   id: number
   titulo: string
   destacado: boolean
@@ -11,17 +11,18 @@ export type Produtos = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: Array<{
-    foto: string
-    preco: number
-    id: number
-    nome: string
-    descricao: string
-    porcao: string
-  }>
+  cardapio: Cardapio[]
+}
+export interface Cardapio {
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
 }
 const Home = () => {
-  const [produtos, setProdutos] = useState<Produtos[]>([])
+  const [produtos, setProdutos] = useState<Restaurantes[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')

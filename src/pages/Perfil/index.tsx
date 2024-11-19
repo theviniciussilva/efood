@@ -3,22 +3,25 @@ import Cardapio from '../../components/Cardapio'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import Hero from '../../components/Hero'
-import { Produtos } from '../Home'
+import { useParams } from 'react-router-dom'
+import { Restaurantes } from '../Home'
 
 const Perfil = () => {
-  const [produtos, setProdutos] = useState<Produtos[]>([])
+  const { id } = useParams()
+
+  const [produtos, setProdutos] = useState<Restaurantes>()
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
       .then((res) => res.json())
       .then((res) => setProdutos(res))
-  }, [])
+  }, [id])
 
   return (
     <>
       <Header />
-      <Hero />
-      <Cardapio layout="secondary" restaurantes={produtos} />
+      <Hero restaurante={produtos} />
+      <Cardapio layout="secondary" comidas={produtos} />
       <Footer />
     </>
   )
