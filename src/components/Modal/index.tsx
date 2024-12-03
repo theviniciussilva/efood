@@ -1,15 +1,27 @@
 import { BotaoCarrinho } from '../Produto/styles'
 import fechar from '../../assets/images/fechar.png'
 import { ImageContainer, ModalContent, Modal as ModalMain } from './styles'
+import { useDispatch } from 'react-redux'
+import { Cardapio } from '../../pages/Home'
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
+  prato: Cardapio | undefined
   visible?: boolean
   onClose?: () => void
   foto: string
-  preco: number | undefined
+  preco: number
   nome: string
   descricao: string
-  porcao: string | undefined
+  porcao: string
+}
+export const formataPreco = (preco: number) => {
+  if (preco) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(preco)
+  }
 }
 
 const Modal = ({
@@ -19,18 +31,16 @@ const Modal = ({
   nome,
   descricao,
   porcao,
-  preco
+  preco,
+  prato
 }: Props) => {
-  if (!visible) return null
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
+  const dispatch = useDispatch()
 
-  if (!preco) {
-    return <h3>Carregando</h3>
+  const addToCart = () => {
+    if (prato) {
+      dispatch(add(prato))
+      dispatch(open())
+    }
   }
 
   return (
@@ -47,7 +57,7 @@ const Modal = ({
               <p>{descricao}</p>
               <br />
               <p>Serve: de {porcao}</p>
-              <BotaoCarrinho to="#">
+              <BotaoCarrinho onClick={addToCart} to="#">
                 Adicionar ao carrinho - {formataPreco(preco)}
               </BotaoCarrinho>
             </div>

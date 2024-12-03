@@ -24,6 +24,9 @@ const Cardapio = ({ restaurantes, layout, comidas }: Props) => {
           {layout === 'primary' &&
             restaurantes?.map((restaurante) => (
               <Produto
+                prato={undefined}
+                preco={0}
+                porcao={''}
                 key={restaurante.id}
                 nota={restaurante.avaliacao}
                 infos={getProdutosTags(restaurante)}
@@ -46,6 +49,7 @@ const Cardapio = ({ restaurantes, layout, comidas }: Props) => {
                 id={prato.id}
                 preco={prato.preco}
                 porcao={prato.porcao}
+                prato={prato}
               />
             ))}
         </CardapioGrid>

@@ -14,17 +14,19 @@ import {
 import estrela from '../../assets/images/estrela.svg'
 import { useState } from 'react'
 import Modal from '../Modal'
+import { Cardapio } from '../../pages/Home'
 
 type ProdutosItem = {
   foto: string
-  preco?: number
+  preco: number
   id: number
   nome: string
   descricao: string
-  porcao?: string
+  porcao: string
   layout: 'primary' | 'secondary'
   infos: string[]
   nota?: number
+  prato: Cardapio | undefined
 }
 
 const Produto = ({
@@ -36,7 +38,8 @@ const Produto = ({
   infos,
   nota,
   id,
-  porcao
+  porcao,
+  prato
 }: ProdutosItem) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
 
@@ -77,7 +80,7 @@ const Produto = ({
             }}
             to="#"
           >
-            Adicionar ao carrinho
+            Mais detalhes
           </BotaoCarrinho>
         )}
       </ProdutoContainer>
@@ -88,6 +91,7 @@ const Produto = ({
         nome={nome}
         porcao={porcao}
         visible={modalEstaAberto}
+        prato={prato}
         onClose={() => setModalEstaAberto(false)}
       />
     </>
