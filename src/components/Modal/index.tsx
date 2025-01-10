@@ -57,7 +57,13 @@ const Modal = ({
               <p>{descricao}</p>
               <br />
               <p>Serve: de {porcao}</p>
-              <BotaoCarrinho onClick={addToCart} to="#">
+              <BotaoCarrinho
+                onClick={() => {
+                  addToCart()
+                  onClose && onClose()
+                }}
+                to="#"
+              >
                 Adicionar ao carrinho - {formataPreco(preco)}
               </BotaoCarrinho>
             </div>
