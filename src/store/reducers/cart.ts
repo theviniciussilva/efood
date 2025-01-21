@@ -7,7 +7,6 @@ type CartState = {
   Adress: boolean
   Payment: boolean
   Checkout: boolean
-  Proof: boolean
 }
 
 const initialState: CartState = {
@@ -15,8 +14,7 @@ const initialState: CartState = {
   isOpen: false,
   Checkout: false,
   Adress: false,
-  Payment: false,
-  Proof: false
+  Payment: false
 }
 
 const cartSlice = createSlice({
@@ -49,13 +47,10 @@ const cartSlice = createSlice({
     },
     payment: (state) => {
       state.Payment = !state.Payment
-    },
-    proof: (state) => {
-      state.Proof = !state.Proof
     }
   }
 })
 
-export const { add, close, open, remove, adress, payment, checkout, proof } =
+export const { add, close, open, remove, adress, payment, checkout } =
   cartSlice.actions
 export default cartSlice.reducer

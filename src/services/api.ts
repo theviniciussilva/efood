@@ -8,7 +8,7 @@ type Product = {
 
 type PurchasePayload = {
   products: Product[]
-  delivery: {
+  delivery?: {
     receiver: string
     adress: {
       description: string
@@ -19,6 +19,7 @@ type PurchasePayload = {
     }
   }
   payment: {
+    active: boolean
     card: {
       name: string
       number: string

@@ -2,6 +2,7 @@ import logo from '../../assets/images/logo.png'
 import facebook from '../../assets/images/facebook-round-svgrepo-com 1.svg'
 import instagram from '../../assets/images/instagram-round-svgrepo-com (1) 1.svg'
 import twitter from '../../assets/images/twitter-2-svgrepo-com 1.svg'
+
 import { Container, FooterDescricao, Social } from './styles'
 import { Link } from 'react-router-dom'
 

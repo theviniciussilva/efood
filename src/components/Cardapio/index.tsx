@@ -1,6 +1,7 @@
+import Produto from '../Produto'
+
 import { Restaurantes } from '../../pages/Home/index'
 import { CardapioContainer, CardapioGrid } from './styles'
-import Produto from '../Produto'
 
 export type Props = {
   restaurantes?: Restaurantes[]

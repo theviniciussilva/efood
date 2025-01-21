@@ -1,11 +1,14 @@
-import { BotaoCarrinho } from '../Produto/styles'
-import { CartCointainer, Overlay, SideBar, CartItem, Prices } from './styles'
-import { RootReducer } from '../../store'
 import { useDispatch, useSelector } from 'react-redux'
-import { adress, checkout, close, remove } from '../../store/reducers/cart'
-import { formataPreco } from '../Modal'
-import { Cardapio } from '../../pages/Home'
+
+import * as S from './styles'
+import { BotaoCarrinho } from '../Produto/styles'
+
 import CheckoutPage from '../Checkout'
+
+import { Cardapio } from '../../pages/Home'
+import { RootReducer } from '../../store'
+import { adress, checkout, close, remove } from '../../store/reducers/cart'
+import { formataPreco } from '../../utils'
 
 export const getTotalPrice = (items: Cardapio[]) => {
   return items.reduce((acumulador, valorAtual) => {
@@ -36,20 +39,20 @@ const Cart = () => {
   return (
     <>
       {items.length === 0 && (
-        <CartCointainer className={isOpen ? 'is-open' : ''}>
-          <Overlay onClick={closeCart} />
-          <SideBar>
+        <S.CartCointainer className={isOpen ? 'is-open' : ''}>
+          <S.Overlay onClick={closeCart} />
+          <S.SideBar>
             <h3>Por favor insira um item no carrinho para prosseguir</h3>
-          </SideBar>
-        </CartCointainer>
+          </S.SideBar>
+        </S.CartCointainer>
       )}
       {items.length > 0 && (
-        <CartCointainer className={isOpen ? 'is-open' : ''}>
-          <Overlay onClick={closeCart} />
-          <SideBar>
+        <S.CartCointainer className={isOpen ? 'is-open' : ''}>
+          <S.Overlay onClick={closeCart} />
+          <S.SideBar>
             <ul>
               {items.map((item) => (
-                <CartItem key={item.id}>
+                <S.CartItem key={item.id}>
                   <div>
                     <img src={item.foto} />
                   </div>
@@ -63,13 +66,13 @@ const Cart = () => {
                       type="button"
                     />
                   </div>
-                </CartItem>
+                </S.CartItem>
               ))}
             </ul>
-            <Prices>
+            <S.Prices>
               <span>Valor total</span>
               <span>{formataPreco(getTotalPrice(items))}</span>
-            </Prices>
+            </S.Prices>
             <BotaoCarrinho
               onClick={() => {
                 closeCart()
@@ -79,17 +82,17 @@ const Cart = () => {
             >
               Continuar com a entrega
             </BotaoCarrinho>
-          </SideBar>
-        </CartCointainer>
+          </S.SideBar>
+        </S.CartCointainer>
       )}
 
       {Checkout && (
-        <CartCointainer className={Checkout ? 'is-open' : ''}>
-          <Overlay />
-          <SideBar>
+        <S.CartCointainer className={Checkout ? 'is-open' : ''}>
+          <S.Overlay />
+          <S.SideBar>
             <CheckoutPage />
-          </SideBar>
-        </CartCointainer>
+          </S.SideBar>
+        </S.CartCointainer>
       )}
     </>
   )
