@@ -120,9 +120,10 @@ const Checkout = () => {
   }
 
   const goToProof = () => {
+    const validation = form.values.cardOwner
     Object.values(form.touched).forEach((touched) => {
       touched
-      if (touched && form.isValid) {
+      if (touched && form.isValid && validation) {
         dispatch(payment())
       }
     })
@@ -142,6 +143,7 @@ const Checkout = () => {
     return hasError
   }
 
+  console.log(form)
   return (
     <>
       {data && isSuccess && !Adress && !Payment ? (
