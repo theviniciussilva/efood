@@ -26,3 +26,6 @@ Ao final do fluxo, há um método de compra validado que envia os dados cadastra
 * 1 - Clone o repositório.
 * 2 - Instale as dependências.
 * 3 - Inicialize a aplicação.
+
+# Link da build na Vercel
+https://vinicius-efood.vercel.app/
